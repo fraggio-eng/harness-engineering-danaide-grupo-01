@@ -16,11 +16,13 @@ La fase en curso es la primera casilla sin marcar.
 
 Estados de un ticket: Abierto, En proceso, Derivado, Bloqueado y Cerrado.
 
-- **MDA-1.** Al crear, el ticket exige cliente, título, categoría, prioridad y descripción. El estado inicial es Abierto. Consultar muestra título, descripción, fecha de creación, prioridad, asignación y estado. La asignación puede venir vacía hasta MDA-2. El vencimiento de SLA no se calcula en esta fase.
-- **MDA-2.** Asignar y responder. El estado En proceso entra en esta fase.
+- **MDA-1.** Al crear, el ticket exige cliente, título, categoría, prioridad y descripción. El estado inicial es Abierto. Consultar muestra título, descripción, fecha de creación, prioridad, asignación y estado. El listado no filtra: va por prioridad (Crítica, Alta, Media, Baja) y, dentro de la misma prioridad, del más antiguo al más reciente. La asignación puede venir vacía hasta MDA-2. El vencimiento de SLA no se calcula en esta fase.
+- **MDA-2.** Asignar y responder. El estado En proceso entra en esta fase. También entran los filtros del listado por estado, prioridad y cliente.
 - **MDA-3.** Cerrar. El estado Cerrado entra en esta fase.
-- **MDA-4.** El reloj arranca en la fecha de carga. Los plazos de resolución están en horas hábiles.
-  - Primera respuesta: el sistema calcula el vencimiento al crear el ticket. Vence a los 10 minutos.
-  - Resolución: Crítica, 24 horas hábiles. Alta, entre 48 y 72 horas hábiles. Media, entre 3 y 5 días hábiles. Baja, entre 1 y 3 semanas hábiles. Alta, media y baja todavía tienen rango: cada una necesita un único valor antes de escribir su spec, si no el criterio no se puede testear.
+- **MDA-4.** El reloj arranca en la fecha de carga. La primera respuesta vence a los 10 minutos: el sistema calcula ese vencimiento al crear el ticket. La resolución está toda en horas. Se tomó el menor de cada rango anterior para que el criterio sea un solo número y el orden de exigencia se mantenga (1 día = 24 horas, 1 semana = 168 horas).
+  - Crítica: 24 horas.
+  - Alta: 48 horas.
+  - Media: 72 horas.
+  - Baja: 168 horas.
 - **MDA-5.** Escalar de nivel (1, 2 y 3). El estado Derivado entra en esta fase.
-- **Bloqueado** es un estado válido y todavía no tiene fase.
+- **Bloqueado** es un estado válido. Queda anotado hasta que aparezca una historia propia. No se agrega a una fase existente.
